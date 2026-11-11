@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Set up the dashboard page
 st.set_page_config(
@@ -16,10 +18,10 @@ st.write(
 )
 
 # Load prediction results
-df = pd.read_csv("../stock_prediction_results.csv")
+df = pd.read_csv(BASE_DIR / "stock_prediction_results.csv")
 
 # Load original dataset containing technical indicators
-indicators_df = pd.read_csv("../stock_data_with_indicators.csv")
+indicators_df = pd.read_csv(BASE_DIR / "stock_data_with_indicators.csv.gz", compression="gzip")
 
 # Convert date column to datetime
 indicators_df["date"] = pd.to_datetime(indicators_df["date"])
